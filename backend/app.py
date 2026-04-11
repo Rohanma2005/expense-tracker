@@ -9,6 +9,7 @@ from flask_bcrypt import Bcrypt
 migrate = Migrate()
 bcrypt = Bcrypt()
 jwt = JWTManager()
+#test comment
 
 def create_app():
     app = Flask(__name__)
