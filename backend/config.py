@@ -17,3 +17,4 @@ class Config:
     DB_PASSWORD_ENCODED = urllib.parse.quote_plus(DB_PASSWORD)
     SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD_ENCODED}@{DB_HOST}/{DB_NAME}"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    # DB configuration
