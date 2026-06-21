@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.4
+    container_name: expense_tracker_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: MYSQLserver@2oo5
+      MYSQL_DATABASE: expense_tracker_db
+      MYSQL_USER: expense_user
+      MYSQL_PASSWORD: expensepass
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  backend:
+    build: ./backend
+    container_name: expense_tracker_backend
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      SECRET_KEY: your_production_secret_key_here
+      JWT_SECRET_KEY: your_production_jwt_secret_key_here
+      DB_USERNAME: expense_user
+      DB_PASSWORD: expensepass
+      DB_HOST: db
+      DB_NAME: expense_tracker_db
+
+  frontend:
+    build: ./frontend
+    container_name: expense_tracker_frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:

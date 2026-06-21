@@ -7,3 +7,4 @@ flask-bcrypt
 pymysql
 python-dotenv
 cryptography
+gunicorn
